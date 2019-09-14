@@ -6,8 +6,8 @@ let package = Package(
   name: "Topaz",
   products: [
     .library(
-      name: "Topaz",
-      targets: ["Topaz"]),
+      name: "Swift",
+      targets: ["Swift"]),
     .executable(
       name: "TopazClient",
       targets: ["TopazClient"]),
@@ -17,8 +17,11 @@ let package = Package(
   targets: [
     /// A minimal reimplementation of the Swift standard library.
     .target(
-      name: "Topaz",
+      /// The target must be named "Swift" because the compiler expects to find certain types
+      /// (e.g. ExpressibleBy…Literal) in the "Swift" module.
+      name: "Swift",
       dependencies: ["CTopazRuntime"],
+      path: "Sources/Topaz",
       swiftSettings: [
         // Disable the implicit `import Swift` statement for this module.
         // We don't want to use the normal Swift standard library.
@@ -35,7 +38,7 @@ let package = Package(
     /// An executable for playing with and testing the Topaz library.
     .target(
       name: "TopazClient",
-      dependencies: ["Topaz"],
+      dependencies: ["Swift"],
       swiftSettings: [
         // Disable the implicit `import Swift` statement for this module.
         // We don't want to use the normal Swift standard library.
