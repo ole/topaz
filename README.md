@@ -4,7 +4,7 @@ An attempt to reimplement a minimal version of the Swift standard library.
 
 ## Structure
 
-The files in `Sources/Topaz` contain the Topaz minimal standard library implementation. The public name of this module is "Swift" (not "Topaz") because the compiler looks for certain types inside the module named "Swift".
+The files in `Sources/Topaz` contain the Topaz minimal standard library implementation. The public name of this module when importing it in code is "Swift" (not "Topaz") because the compiler looks for certain types inside the module named "Swift".
 
 The CTopazRuntime module is the runtime library used by the Swift module.
 

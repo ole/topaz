@@ -6,7 +6,9 @@ let package = Package(
   name: "Topaz",
   products: [
     .library(
-      name: "Swift",
+      // The product name can remain "Topaz", but the target published by the product
+      // must be named "Swift".
+      name: "Topaz",
       targets: ["Swift"]),
     .executable(
       name: "TopazClient",
