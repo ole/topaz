@@ -8,3 +8,5 @@ if a {
 } else {
   b = true
 }
+
+printBool()
