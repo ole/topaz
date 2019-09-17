@@ -2,6 +2,12 @@
 // Bool Datatype and Supporting Operators
 //===----------------------------------------------------------------------===//
 
+import CTopazLib
+
+public func printBool() {
+    CTopazLib.printBool()
+}
+
 // Our Boolean type must also be named Bool because that name is hardcoded into
 // the compiler to be used e.g. in conditional expressions.
 public struct Bool {
@@ -17,3 +23,4 @@ extension Bool: _ExpressibleByBuiltinBooleanLiteral, ExpressibleByBooleanLiteral
     self = value
   }
 }
+

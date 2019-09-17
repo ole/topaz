@@ -22,12 +22,15 @@ let package = Package(
       /// The target must be named "Swift" because the compiler expects to find certain types
       /// (e.g. ExpressibleBy…Literal) in the "Swift" module.
       name: "Swift",
-      dependencies: ["CTopazRuntime"],
+      dependencies: ["CTopazRuntime", "CTopazLib"],
       path: "Sources/Topaz",
       swiftSettings: [
         // Disable the implicit `import Swift` statement for this module.
         // We don't want to use the normal Swift standard library.
-        .unsafeFlags(["-parse-stdlib"])
+        .unsafeFlags([
+            "-nostdimport",
+            "-parse-stdlib"
+        ])
     ]),
 
     /// A C library that serves as the runtime for Topaz.
@@ -37,6 +40,10 @@ let package = Package(
       name: "CTopazRuntime",
       dependencies: []),
 
+    .target(
+      name: "CTopazLib",
+      dependencies: []),
+
     /// An executable for playing with and testing the Topaz library.
     .target(
       name: "TopazClient",
@@ -44,7 +51,10 @@ let package = Package(
       swiftSettings: [
         // Disable the implicit `import Swift` statement for this module.
         // We don't want to use the normal Swift standard library.
-        .unsafeFlags(["-parse-stdlib"])
+        .unsafeFlags([
+            "-nostdimport",
+            "-parse-stdlib"
+        ])
       ]),
   ]
 )
