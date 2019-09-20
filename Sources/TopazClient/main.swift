@@ -9,4 +9,4 @@ if a {
   b = true
 }
 
-printBool()
+printBool(false)

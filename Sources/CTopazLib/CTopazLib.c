@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void printBool(void)
+void printBool(_Bool b)
 {
-    printf("%d\n", 42);
+    printf(b ? "true\n" : "false\n");
 }
