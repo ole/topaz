@@ -1,1 +1,1 @@
-void printBool(void);
+void printBool(_Bool b);

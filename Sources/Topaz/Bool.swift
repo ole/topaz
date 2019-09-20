@@ -4,8 +4,8 @@
 
 import CTopazLib
 
-public func printBool() {
-    CTopazLib.printBool()
+public func printBool(_ v: Bool) {
+    CTopazLib.printBool(v)
 }
 
 // Our Boolean type must also be named Bool because that name is hardcoded into
