@@ -44,6 +44,12 @@ Because a Swift struct with a single stored property is a zero-cost abstraction,
 
 ## FAQ
 
+Q: Why do this?<br>
+A: Mostly for fun and for the sake of learning how the Swift compiler and the Swift runtime work.
+
+Q: Does rewriting the Swift standard library have any practical applications?<br>
+A: I doubt it. The normal standard library is quite big and has some big dependencies (most notably [ICU](http://site.icu-project.org/home) for Unicode support), so a smaller standard library can be useful for running Swift programs on embedded devices and microcontrollers. But it’s probably a better idea to start with the normal standard library and remove things from it that to start from scratch.
+
 Q: Why the name?<br>
 A: A [topaz](https://en.wikipedia.org/wiki/Topaz_(hummingbird)) is a type of hummingbird, and hummingbirds are [closely related](https://en.wikipedia.org/wiki/Apodiformes) to [swifts](https://en.wikipedia.org/wiki/Swift).
 
