@@ -9,7 +9,9 @@
 #ifndef Exclusivity_h
 #define Exclusivity_h
 
-#include <stdint.h>
+#include <cstdint>
+
+extern "C" {
 
 /// Begin dynamically tracking an access.
 ///
@@ -36,5 +38,7 @@ char *swift_getOrigOfReplaceable(char **OrigFnPtr);
 
 /// Stop dynamically tracking an access.
 void swift_endAccess(void * /*ValueBuffer * */ buffer);
+
+}
 
 #endif // Exclusivity_h

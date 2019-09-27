@@ -23,4 +23,3 @@ extension Bool: _ExpressibleByBuiltinBooleanLiteral, ExpressibleByBooleanLiteral
     self = value
   }
 }
-

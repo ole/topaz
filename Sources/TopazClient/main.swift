@@ -9,4 +9,7 @@ if a {
   b = true
 }
 
+let n = 42
+printInt(n)
+
 printBool(false)

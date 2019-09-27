@@ -37,8 +37,15 @@ let package = Package(
     /// Used to implement (stubs for) runtime functions the Swift compiler expects,
     /// and also to wrap calls into C APIs to interact with the operating system.
     .target(
-      name: "CTopazRuntime",
-      dependencies: []),
+        name: "CTopazRuntime",
+        dependencies: [],
+        cxxSettings: [
+            .unsafeFlags([
+                "-std=gnu++14"
+            ])
+        ]
+    ),
+
 
     .target(
       name: "CTopazLib",
