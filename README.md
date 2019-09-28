@@ -6,7 +6,9 @@ An attempt to reimplement a minimal version of the [Swift](https://swift.org) [s
 
 The files in `Sources/Topaz` contain the Topaz minimal standard library implementation. The public name of this module when importing it in code is "Swift" (not "Topaz") because the compiler looks for certain types inside the module named "Swift".
 
-The CTopazRuntime module is the runtime library used by the Swift module.
+The CTopazRuntime module is the runtime library used by the Swift module (and the compiler).
+
+The CTopazLib module is a C library that acts as a bridge for allowing the Topaz standard library to call C standard library and operating system APIs.
 
 ## Usage
 
@@ -42,10 +44,39 @@ public struct Int32 {
 
 Because a Swift struct with a single stored property is a zero-cost abstraction, an `Int32` in Swift has the same memory layout as the underlying LLVM type for 32-bit integers, ensuring efficient code generation.
 
+### The Runtime Library
+
+It’s not enough to write a standard library module; we also need a runtime library. The Swift runtime provides functions for things like memory management (retain and release operations), dynamic type casting, and so on. The compiler generates code that calls these runtime functions, so we need to make sure they exist at link time. Like the compiler, the official Swift runtime is written in C++. 
+
+Our replacement runtime is in the CTopazRuntime module. 
+
+### Built-In Value Witness Tables
+
+When you try to write a struct for one of the integer types for the first time, like so:
+
+```swift
+struct Int8 {
+  internal var _value: Builtin.Int8
+}
+```
+
+You’ll get a linker error that says “Undefined symbol: value witness table for Builtin.Int8”. (This error appears as soon as you use one of the Builtin types — except `Builtin.Int1`, which seems to work a little differently.) The value witness table is a record that lists a type’s [size](https://developer.apple.com/documentation/swift/memorylayout/2432227-size), [stride](https://developer.apple.com/documentation/swift/memorylayout/2429192-stride), and [alignment](https://developer.apple.com/documentation/swift/memorylayout/2430730-alignment), as well as function pointers for performing basic operations on an instance, such as copying or destroying a value.
+
+Every type must have a value witness table. When you define a new type, the compiler creates a value witness table and compiles it into the current module. However, the compiler expects to find value witness tables for the Builtin types in the runtime module. We have to create these explicitly so that the linker will find them when it links the runtime library into your code.
+
+### The CTopazLib module
+
+CTopazLib module is a C library that acts as a bridge for allowing the Topaz standard library to call C standard library and operating system APIs, e.g. for printing text to stdout. We can’t import the C standard library (Glibc on Linux or Darwin on Apple platforms) directly in Topaz because Swift’s Clang importer expects a lot of Swift types to exist in the Swift module — it needs those types to map C types to Swift types (e.g. `char *` to `UnsafePointer<Int8>!`). We don’t have all of these types (yet), so we want to start by exposing our own C APIs that only use types we have.
+
+If you get an “undefined symbol” error when calling a C function from Topaz that you defined in CTopazLib, the likely reason is that you used a type in the C function definition (e.g. `uint32_t`) that the Clang importer can’t map to Swift because it doesn’t find the corresponding Swift type (in this case, `UInt32`). You can often fix this issue by adding the appropriate type to Topaz.  
+
 ## FAQ
+
+Q: Why do this?<br>
+A: Mostly for fun and for the sake of learning how the Swift compiler and the Swift runtime work.
+
+Q: Does rewriting the Swift standard library have any practical applications?<br>
+A: I doubt it. The normal standard library is quite big and has some big dependencies (most notably [ICU](http://site.icu-project.org/home) for Unicode support), so a smaller standard library can be useful for running Swift programs on embedded devices and microcontrollers. But it’s probably a better idea to start with the normal standard library and remove things from it than to start from scratch.
 
 Q: Why the name?<br>
 A: A [topaz](https://en.wikipedia.org/wiki/Topaz_(hummingbird)) is a type of hummingbird, and hummingbirds are [closely related](https://en.wikipedia.org/wiki/Apodiformes) to [swifts](https://en.wikipedia.org/wiki/Swift).
-
-Q: Why don’t we import Darwin or Glibc directly inside Topaz to get access to OS APIs (e.g. print to stdout)?<br>
-A: Because the Clang importer inside the Swift compiler expects a lot of Swift types to exist in the Swift module. It needs those types to map C APIs to Swift. We don’t have all of these types yet, so we want to start by exposing our own C APIs that only use types we have.
