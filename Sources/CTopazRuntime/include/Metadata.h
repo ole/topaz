@@ -14,11 +14,11 @@ typedef uint32_t ValueWitnessFlags;
 
 struct ValueWitnessTable {
     void (*initializeBufferWithCopyOfBuffer)();
-    void (*destroy)();
-    void (*initializeWithCopy)();
-    void (*assignWithCopy)();
-    void (*initializeWithTake)();
-    void (*assignWithTake)();
+    void (*destroy)(void *object, const void *metadata);
+    void *(*initializeWithCopy)(void *dest, void *src, const void *metadata);
+    void *(*assignWithCopy)(void *dest, void *src, const void *metadata);
+    void *(*initializeWithTake)(void *dest, void *src, const void *metadata);
+    void *(*assignWithTake)(void *dest, void *src, const void *metadata);
     
     void *(*getEnumTagSinglePayload)();
     void (*storeEnumTagSinglePayload)();

@@ -10,3 +10,6 @@ public typealias CUnsignedChar = UInt8
 
 /// The C 'long long' type.
 public typealias CLongLong = Int64
+
+/// The C 'double' type.
+public typealias CDouble = Double

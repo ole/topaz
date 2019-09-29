@@ -9,3 +9,8 @@ void printInt64(long long v)
 {
     printf("%lld\n", v);
 }
+
+void printDouble(double v)
+{
+    printf("%f\n", v);
+}

@@ -1,3 +1,9 @@
+import CTopazLib
+
+public func printDouble(_ v: Double) {
+    CTopazLib.printDouble(v);
+}
+
 public struct Double {
     var _value: Builtin.FPIEEE64
 
@@ -18,10 +24,16 @@ extension Double : _ExpressibleByBuiltinIntegerLiteral, ExpressibleByIntegerLite
 
 }
 
-extension Double: _ExpressibleByBuiltinFloatLiteral {
+extension Double : _ExpressibleByBuiltinFloatLiteral {
   @_transparent
   public
   init(_builtinFloatLiteral value: Builtin.FPIEEE64) {
     self = Double(value)
   }
+}
+
+extension Double : ExpressibleByFloatLiteral {
+    public init(floatLiteral value: Double) {
+        self = value
+    }
 }
