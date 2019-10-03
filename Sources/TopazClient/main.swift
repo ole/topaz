@@ -43,3 +43,9 @@ let v = 3.1415926
 let d = foo(v)
 printDouble(d.0)
 printDouble(d.1)
+
+let optional = Optional<Bool>.some(true)
+
+if let b = optional {
+    printBool(b)
+}

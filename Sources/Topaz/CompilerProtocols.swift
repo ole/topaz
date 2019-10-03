@@ -11,6 +11,10 @@ public protocol ExpressibleByBooleanLiteral {
   init(booleanLiteral value: BooleanLiteralType)
 }
 
+public protocol ExpressibleByNilLiteral {
+  init(nilLiteral: ())
+}
+
 public protocol _ExpressibleByBuiltinIntegerLiteral {
   init(_builtinIntegerLiteral value: Builtin.IntLiteral)
 }

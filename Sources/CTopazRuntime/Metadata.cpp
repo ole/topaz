@@ -8,6 +8,47 @@ extern "C" void *swift_getObjCClassMetadata(void) {
   return NULL;
 }
 
+extern "C" void *//ValueMetadata *
+swift_allocateGenericValueMetadata(const void *description,
+                                   const void *arguments,
+                                   const void *pattern,
+                                   size_t extraDataSize)
+{
+    return 0;
+}
+
+extern "C" SWIFT_CC(swift)
+MetadataResponse swift_checkMetadataState(MetadataRequest request,
+                                          const void *type)
+{
+    MetadataResponse response = {type, MetadataState::Complete};
+    
+    return response;
+}
+
+extern "C" SWIFT_CC(swift)
+MetadataResponse
+swift_getGenericMetadata(MetadataRequest request,
+                         const void * const *arguments,
+                         const TypeContextDescriptor *description)
+{
+    MetadataResponse response = {NULL, MetadataState::Complete};
+    
+    return response;
+}
+
+extern "C"
+void swift_initEnumMetadataSinglePayload(void *enumType, //EnumMetadata
+                                         EnumLayoutFlags flags,
+                                         const void *payload, //TypeLayout
+                                         unsigned emptyCases)
+{
+    
+}
+
+
+
+
 static ValueWitnessTable *getValueWitnessTable(const void *metadata) {
     return *((ValueWitnessTable **)metadata - 1);
 }

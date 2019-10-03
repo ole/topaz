@@ -72,3 +72,17 @@ precedencegroup MultiplicationPrecedence {
 precedencegroup BitwiseShiftPrecedence {
   higherThan: MultiplicationPrecedence
 }
+
+// Standard prefix operators.
+prefix operator ! : Bool
+
+// "Comparative"
+
+infix operator  <  : ComparisonPrecedence, Comparable
+infix operator  <= : ComparisonPrecedence, Comparable
+infix operator  >  : ComparisonPrecedence, Comparable
+infix operator  >= : ComparisonPrecedence, Comparable
+infix operator  == : ComparisonPrecedence, Equatable
+infix operator  != : ComparisonPrecedence, Equatable
+infix operator === : ComparisonPrecedence
+infix operator !== : ComparisonPrecedence

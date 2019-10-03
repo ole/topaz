@@ -21,4 +21,3 @@ extension UInt8 : _ExpressibleByBuiltinFloatLiteral, ExpressibleByFloatLiteral {
         self._value = Builtin.fptoui_FPIEEE64_Int8(value._value)
     }
 }
-

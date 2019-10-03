@@ -27,3 +27,15 @@ extension Int : _ExpressibleByBuiltinFloatLiteral, ExpressibleByFloatLiteral {
         self._value = Builtin.fptosi_FPIEEE64_Int64(value._value)
     }
 }
+
+extension Int {
+  var _builtinWordValue: Builtin.Word {
+    return Builtin.truncOrBitCast_Int64_Word(_value)
+  }
+}
+
+extension Int {
+    public static func == (lhs: Int, rhs: Int) -> Bool {
+      return Bool(Builtin.cmp_eq_Int64(lhs._value, rhs._value))
+    }
+}
