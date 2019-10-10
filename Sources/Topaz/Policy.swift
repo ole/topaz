@@ -76,6 +76,23 @@ precedencegroup BitwiseShiftPrecedence {
 // Standard prefix operators.
 prefix operator ! : Bool
 
+// "Multiplicative"
+
+infix operator   *: MultiplicationPrecedence
+infix operator  &*: MultiplicationPrecedence
+infix operator   /: MultiplicationPrecedence
+infix operator   %: MultiplicationPrecedence
+infix operator   &: MultiplicationPrecedence
+
+// "Additive"
+
+infix operator   +: AdditionPrecedence
+infix operator  &+: AdditionPrecedence
+infix operator   -: AdditionPrecedence
+infix operator  &-: AdditionPrecedence
+infix operator   |: AdditionPrecedence
+infix operator   ^: AdditionPrecedence
+
 // "Comparative"
 
 infix operator  <  : ComparisonPrecedence, Comparable
@@ -86,3 +103,21 @@ infix operator  == : ComparisonPrecedence, Equatable
 infix operator  != : ComparisonPrecedence, Equatable
 infix operator === : ComparisonPrecedence
 infix operator !== : ComparisonPrecedence
+
+// Compound
+
+infix operator   *=: AssignmentPrecedence
+infix operator  &*=: AssignmentPrecedence
+infix operator   /=: AssignmentPrecedence
+infix operator   %=: AssignmentPrecedence
+infix operator   +=: AssignmentPrecedence
+infix operator  &+=: AssignmentPrecedence
+infix operator   -=: AssignmentPrecedence
+infix operator  &-=: AssignmentPrecedence
+infix operator  <<=: AssignmentPrecedence
+infix operator &<<=: AssignmentPrecedence
+infix operator  >>=: AssignmentPrecedence
+infix operator &>>=: AssignmentPrecedence
+infix operator   &=: AssignmentPrecedence
+infix operator   ^=: AssignmentPrecedence
+infix operator   |=: AssignmentPrecedence

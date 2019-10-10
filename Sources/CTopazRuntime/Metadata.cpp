@@ -92,8 +92,8 @@ constexpr ValueWitnessTable pod_table_with_size_and_stride(int size, int stride)
         0,
         0,
         
-        8, // size
-        8, // stride
+        0, // size
+        0, // stride
         0, // flags
         0,
     };
@@ -110,8 +110,9 @@ template<typename type>struct TargetValueWitnessTable {
     }
 };
 
-const ValueWitnessTable $sBi8_WV  = TargetValueWitnessTable<uint8_t>::table(); // (U)Int8
-const ValueWitnessTable $sBi64_WV = TargetValueWitnessTable<int64_t>::table(); // (U)Int64
-const ValueWitnessTable $sBf64_WV = TargetValueWitnessTable<double>::table(); // Double
+const ValueWitnessTable $sBi8_WV  = TargetValueWitnessTable<uint8_t>::table();  // (U)Int8
+const ValueWitnessTable $sBi64_WV = TargetValueWitnessTable<int64_t>::table();  // (U)Int64
+const ValueWitnessTable $sBf64_WV = TargetValueWitnessTable<double>::table();   // Double
+const ValueWitnessTable $sytWV    = pod_table_with_size_and_stride(0, 0);       // Void
 
 

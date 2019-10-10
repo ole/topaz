@@ -83,3 +83,12 @@ let bb: Bla? = Bla()
 
 let p = printPointer(UnsafeMutableRawPointer(bitPattern: 0x123456))
 _ = printPointer(p)
+
+var i = 1
+var intPointer = UnsafeMutableRawPointer.allocate(byteCount: 8, alignment: 0)
+_ = printPointer(intPointer)
+
+let ptr = intPointer.bindMemory(to: Int.self, capacity: 1)
+//ptr.pointee = 2
+//var ptr = UnsafeMutablePointer(&i)
+//ptr.pointee = 2

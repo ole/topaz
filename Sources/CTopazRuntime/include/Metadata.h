@@ -109,4 +109,6 @@ extern "C" __attribute__((__visibility__("default"))) const ValueWitnessTable $s
 
 extern "C" __attribute__((__visibility__("default"))) const ValueWitnessTable $sBf64_WV;
 
+extern "C" __attribute__((__visibility__("default"))) const ValueWitnessTable $sytWV;
+
 #endif // Metadata_h

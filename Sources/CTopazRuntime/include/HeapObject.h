@@ -1,6 +1,21 @@
 #ifndef HeapObject_h
 #define HeapObject_h
 
+#include <cstdlib>
+
+// Allocate plain old memory. This is the generalized entry point
+// Never returns nil. The returned memory is uninitialized.
+//
+// An "alignment mask" is just the alignment (a power of 2) minus 1.
+
+extern "C"
+void *swift_slowAlloc(size_t bytes, size_t alignMask);
+
+// If the caller cannot promise to zero the object during destruction,
+// then call these corresponding APIs:
+extern "C"
+void swift_slowDealloc(void *ptr, size_t bytes, size_t alignMask);
+
 /// Atomically increments the retain count of an object.
 ///
 /// \param object - may be null, in which case this is a no-op
