@@ -57,6 +57,22 @@ extern "C" SWIFT_CC(swift)
 MetadataResponse swift_checkMetadataState(MetadataRequest request,
                                           const void *type);
 
+/// Retrieve an associated type witness from the given witness table.
+///
+/// \param wtable The witness table.
+/// \param conformingType Metadata for the conforming type.
+/// \param reqBase "Base" requirement used to compute the witness index
+/// \param assocType Associated type descriptor.
+///
+/// \returns metadata for the associated type witness.
+extern "C" SWIFT_CC(swift)
+MetadataResponse swift_getAssociatedTypeWitness(
+                                          MetadataRequest request,
+                                          void *wtable,
+                                          const void *conformingType,
+                                          const void *reqBase,
+                                          const void *assocType);
+
 extern "C" SWIFT_CC(swift)
 MetadataResponse
 swift_getGenericMetadata(MetadataRequest request,

@@ -14,3 +14,10 @@ void printDouble(double v)
 {
     printf("%f\n", v);
 }
+
+void* printPointer(void *pointer)
+{
+    printf("%p\n", pointer);
+    
+    return pointer;
+}
