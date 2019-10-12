@@ -21,3 +21,8 @@ void* printPointer(void *pointer)
     
     return pointer;
 }
+
+void printString(const char *p)
+{
+    printf("%s\n", p);
+}

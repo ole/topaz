@@ -3,6 +3,11 @@
 
 #include <cstdlib>
 
+/// Decrement the strong retain count of an object which might not be a native
+/// Swift object.
+extern "C"
+void swift_unknownObjectRelease(void *value);
+
 // Allocate plain old memory. This is the generalized entry point
 // Never returns nil. The returned memory is uninitialized.
 //

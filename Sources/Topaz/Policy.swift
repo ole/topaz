@@ -16,6 +16,9 @@ public typealias IntegerLiteralType = Int
 public typealias FloatLiteralType = Double
 public typealias BooleanLiteralType = Bool
 
+/// The default type for an otherwise-unconstrained string literal.
+public typealias StringLiteralType = String
+
 //===----------------------------------------------------------------------===//
 // Default types for unconstrained number literals
 //===----------------------------------------------------------------------===//

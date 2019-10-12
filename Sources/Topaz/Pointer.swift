@@ -297,5 +297,5 @@ func _convertConstStringToUTF8PointerArgument<
 //  let utf8 = Array(str.utf8CString)
 //  return _convertConstArrayToPointerArgument(utf8)
 
-    return (nil, ToPointer(bitPattern: 0xdeadbeef)!)
+    return (nil, ToPointer(str.utf8CPointer))
 }

@@ -93,3 +93,9 @@ _ = printPointer(UnsafeMutableRawPointer(ptr))
 
 ptr.pointee = 2
 printInt(i)
+
+// String support
+
+// This requires the protocol ExpressibleByStringLiteral
+let str = "Hello World"
+printString(str)
