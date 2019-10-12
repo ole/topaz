@@ -57,6 +57,26 @@ extern "C" SWIFT_CC(swift)
 MetadataResponse swift_checkMetadataState(MetadataRequest request,
                                           const void *type);
 
+/// Retrieve a witness table based on a given conformance.
+///
+/// \param conformance - The protocol conformance descriptor, which
+///   contains any information required to form the witness table.
+///
+/// \param type - The conforming type, used to form a uniquing key
+///   for the conformance.
+///
+/// \param instantiationArgs - An opaque pointer that's forwarded to
+///   the instantiation function, used for conditional conformances.
+///   This API implicitly embeds an assumption that these arguments
+///   never form part of the uniquing key for the conformance, which
+///   is ultimately a statement about the user model of overlapping
+///   conformances.
+extern "C"
+const void *
+swift_getWitnessTable(const void *conformance,
+                      const void *type,
+                      const void * const *instantiationArgs);
+
 /// Retrieve an associated type witness from the given witness table.
 ///
 /// \param wtable The witness table.

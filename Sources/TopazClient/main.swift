@@ -88,7 +88,8 @@ var i = 1
 var intPointer = UnsafeMutableRawPointer.allocate(byteCount: 8, alignment: 0)
 _ = printPointer(intPointer)
 
-let ptr = intPointer.bindMemory(to: Int.self, capacity: 1)
-//ptr.pointee = 2
-//var ptr = UnsafeMutablePointer(&i)
-//ptr.pointee = 2
+var ptr = UnsafeMutablePointer(&i)
+_ = printPointer(UnsafeMutableRawPointer(ptr))
+
+ptr.pointee = 2
+printInt(i)

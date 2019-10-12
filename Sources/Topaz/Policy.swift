@@ -21,6 +21,8 @@ public typealias BooleanLiteralType = Bool
 //===----------------------------------------------------------------------===//
 public typealias _MaxBuiltinFloatType = Builtin.FPIEEE64
 
+public typealias AnyObject = Builtin.AnyObject
+
 //===----------------------------------------------------------------------===//
 // Standard precedence groups
 //===----------------------------------------------------------------------===//

@@ -240,7 +240,7 @@ public struct UnsafeMutablePointer<Pointee>: _Pointer {
     /// Do not assign an instance of a nontrivial type through `pointee` to
     /// uninitialized memory. Instead, use an initializing method, such as
     /// `initialize(to:count:)`.
-    /*
+    
     public var pointee: Pointee {
         unsafeAddress {
             return UnsafePointer(self)
@@ -249,7 +249,7 @@ public struct UnsafeMutablePointer<Pointee>: _Pointer {
             return self
         }
     }
-     */
+    
     /// Initializes this pointer's memory with the specified number of
     /// consecutive copies of the given value.
     ///

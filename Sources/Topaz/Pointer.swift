@@ -226,18 +226,76 @@ extension _Pointer /*: Strideable*/ {
 //  }
 //}
 
-//public // COMPILER_INTRINSIC
-//func _convertPointerToPointerArgument<
-//  FromPointer : _Pointer,
-//  ToPointer : _Pointer
-//>(_ from: FromPointer) -> ToPointer {
-//  return ToPointer(from._rawValue)
-//}
+/// Derive a pointer argument from a convertible pointer type.
+@_transparent
+public // COMPILER_INTRINSIC
+func _convertPointerToPointerArgument<
+  FromPointer: _Pointer,
+  ToPointer: _Pointer
+>(_ from: FromPointer) -> ToPointer {
+  return ToPointer(from._rawValue)
+}
+
+/// Derive a pointer argument from the address of an inout parameter.
+@_transparent
+public // COMPILER_INTRINSIC
+func _convertInOutToPointerArgument<
+  ToPointer: _Pointer
+>(_ from: Builtin.RawPointer) -> ToPointer {
+  return ToPointer(from)
+}
+
+/// Derive a pointer argument from a value array parameter.
+///
+/// This always produces a non-null pointer, even if the array doesn't have any
+/// storage.
+@_transparent
+public // COMPILER_INTRINSIC
+func _convertConstArrayToPointerArgument<
+  FromElement,
+  ToPointer: _Pointer
+>(_ arr: [FromElement]) -> (AnyObject?, ToPointer) {
+//  let (owner, opaquePointer) = arr._cPointerArgs()
 //
-///// Derive a pointer argument from the address of an inout parameter.
-//public // COMPILER_INTRINSIC
-//func _convertInOutToPointerArgument<
-//  ToPointer : _Pointer
-//>(_ from: Builtin.RawPointer) -> ToPointer {
-//  return ToPointer(from)
-//}
+//  let validPointer: ToPointer
+//  if let addr = opaquePointer {
+//    validPointer = ToPointer(addr._rawValue)
+//  } else {
+//    let lastAlignedValue = ~(MemoryLayout<FromElement>.alignment - 1)
+//    let lastAlignedPointer = UnsafeRawPointer(bitPattern: lastAlignedValue)!
+//    validPointer = ToPointer(lastAlignedPointer._rawValue)
+//  }
+//  return (owner, validPointer)
+
+    return (nil, ToPointer(bitPattern: 0xdeadbeef)!)
+}
+
+/// Derive a pointer argument from an inout array parameter.
+///
+/// This always produces a non-null pointer, even if the array's length is 0.
+@_transparent
+public // COMPILER_INTRINSIC
+func _convertMutableArrayToPointerArgument<
+  FromElement,
+  ToPointer: _Pointer
+>(_ a: inout [FromElement]) -> (AnyObject?, ToPointer) {
+  // TODO: Putting a canary at the end of the array in checked builds might
+  // be a good idea
+
+  // Call reserve to force contiguous storage.
+//  a.reserveCapacity(0)
+//  _debugPrecondition(a._baseAddressIfContiguous != nil || a.isEmpty)
+
+  return _convertConstArrayToPointerArgument(a)
+}
+
+/// Derive a UTF-8 pointer argument from a value string parameter.
+public // COMPILER_INTRINSIC
+func _convertConstStringToUTF8PointerArgument<
+  ToPointer: _Pointer
+>(_ str: String) -> (AnyObject?, ToPointer) {
+//  let utf8 = Array(str.utf8CString)
+//  return _convertConstArrayToPointerArgument(utf8)
+
+    return (nil, ToPointer(bitPattern: 0xdeadbeef)!)
+}

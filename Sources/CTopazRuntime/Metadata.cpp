@@ -46,6 +46,15 @@ void swift_initEnumMetadataSinglePayload(void *enumType, //EnumMetadata
     
 }
 
+extern "C"
+const void *
+swift_getWitnessTable(const void *conformance,
+                      const void *type,
+                      const void * const *instantiationArgs)
+{
+    return 0;
+}
+
 extern "C" SWIFT_CC(swift)
 MetadataResponse
 swift_getAssociatedTypeWitness(MetadataRequest request,
